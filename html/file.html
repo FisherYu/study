@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Image Upload</title>
+	<meta charset="utf-8">
+	<style type="text/css">
+		.upload-wrap {
+			height: 100px;
+		    width: 100px;
+		    position: relative;
+		    display: inline-block;
+		    background: #f7f7f7;
+		}
+		.upload-wrap input[type="file"], .upload-wrap .preview{
+		    opacity: 0;
+		    position: absolute;
+		    left: 0;
+		    top: 0;
+		    width: 100%;
+		    height: 100%;
+		}
+		.upload-wrap .preview {
+			opacity: 1;
+		}
+
+	</style>
+</head>
+<body>
+<div>
+	<div class="upload-wrap" >
+	<image class="preview" alt="上传图片"/>
+	<input type="file" value="上传图片" id="js_file_upload" alt="上传图片" size="5120" accept="image/*">
+	</div>
+</div>
+<script type="text/javascript">
+	;(function(){
+		var $fileUpload = document.getElementById('js_file_upload');
+		$fileUpload.addEventListener('change', function(e){
+			console.log('change')
+		});
+	})()
+</script>
+</body>
+</html>
