@@ -2,45 +2,61 @@
 <html>
 <head>
 	<meta charset="utf-8"/>
-	<title>Vue Tempalte</title>
+	<title>Vue Computed</title>
 </head>
 <body>
 <div id="vueDemo">
-	<span>{{a}}</span>
-	<span v-once>{{a}}</span>
-	<span>{{h}}</span>
-	<span v-html="h"></span>
-	<input type="text" v-bind:value="a" v-bind:disabled="a%2 === 0">
-	<button v-on:click="updateHandle">Update</button>
 	<div>
-		<h2>Filter</h2>
+		<h2>Computed</h2>
 		<div>{{msg | toUpper}}</div>
-		<div>{{msg | toUpperIndex(1)}}</div>
+		<div>{{reverseMsg | toUpper}}</div>
+		<!-- this.msg 变化时方法也会自动调用？ 值变化引发重现渲染，导致方法调用 -->
+		<div>{{reverse() | toUpper}} </div>
 		<input type="text" v-model:value="msg">
+		<!-- 计算属性值变化依赖被依赖属性值的变化, 被依赖属性必须是Vue的实例属性？ -->
+		<div>Computed:	{{now}}</div>
+		<div>Method:	{{nowM()}}</div>
+		<div>a: {{a}}</div>
+		<button v-on:click="update">Upate</button>
 	</div>
 </div>
 <script type="text/javascript" src="https://unpkg.com/vue@2.2.4/dist/vue.js"></script>
 <script type="text/javascript">
 	;(function(){
 		var data = {a: 2};
+		var a=0;
 		var vm = new Vue({
 			el: '#vueDemo',
 			methods: {
-				updateHandle: function() {
-					this.a++;
-				}
 			},
 			data: {
-				a: 2,
-				h: '<h2>yoo</h2>',
 				msg: ''
+			},
+			methods: {
+				reverse: function() {
+					return this.msg.split('').reverse().join('');
+				},
+				nowM: function() {
+					return Date.now();ß
+				},
+				update: function() {
+					a++;
+				}
 			},
 			filters: {
 				toUpper: function(txt) {
 					return txt.toUpperCase();
+				}
+			},
+			computed: {
+				reverseMsg: function(txt){
+					return this.msg.split('').reverse().join('');
 				},
-				toUpperIndex: function(txt, index){
-					return index + txt.toUpperCase();
+				now: function() {
+					return Date.now();
+				},
+				a: function() {
+					return a;
 				}
 			}
 		});
