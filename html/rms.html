@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" name="viewport" />
+</head>
+<body>
+<input id="js_name">
+<input type="button" id="js_submit" value="Submit" />
+<script type="text/javascript">
+    (function () {
+        var url = '//webresource.fws.qa.nt.ctripcorp.com/resaresonline/risk/ubtrms/latest/default/mrms.js', timeout = 10;
+        var now = new Date();
+        setTimeout(function () {
+            var f = document.createElement('script')
+            f.type = 'text/javascript';
+            f.id = 'scrmsd__script';
+            f.async = true;
+            f.src = ('https:' == document.location.protocol ? 'https:' : 'http:') + url + "?v=" + now.getYear() + now.getMonth() + "-" + now.getDate();
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(f, s);
+        }, timeout);
+        window.scrmsd__startScriptLoad = 1 * new Date();
+    })();
+</script>
+<script type="text/javascript">
+	;(function(){
+		document.getElementById('js_submit').addEventListener('click', function(){
+			var rmsToken;
+			window.__rmsbfi = window.__rmsbfi || [];
+			window.__rmsbfi.push(['_getRmsToken', function (result) {
+			    rmsToken = result
+			}], false);
+			 
+			console.log(rmsToken);
+		})
+	})()
+</script>
+</body>
+</html>

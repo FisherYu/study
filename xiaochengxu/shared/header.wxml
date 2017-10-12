@@ -1,0 +1,4 @@
+<view>Header</view>
+<template name="header-test">
+From Header
+</template>

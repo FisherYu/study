@@ -1,0 +1,17 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/baseinfo/baseinfo",
+    "cwx/component/calendar/calendar",
+    "cwx/component/imagebrowser/imagebrowser",
+    "cwx/component/city/city",
+    "pages/accounts/login",
+    "pages/myctrip/list/list",
+    "pages/passenger/passengerlist"
+  ],
+  "window":{
+    "navigationBarBackgroundColor": "#099fde",
+    "navigationBarTitleText": "东亚携程联名信用卡",
+    "navigationBarTextStyle":"white"
+  }
+}

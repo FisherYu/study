@@ -1,0 +1,3 @@
+<!--pages/baseinfo/baseinfo.wxml-->
+<button bindtap="backHandle">Back</button>
+<button bindtap="invokeCallbackHandle">Callback</button>

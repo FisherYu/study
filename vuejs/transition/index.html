@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		body>div:nth-child(2n) {
+			background: #ccc;
+			margin-top: 10px;
+		}
+		.fade-enter-active, .fade-leave-active {
+		  transition: opacity .5s
+		}
+		.fade-enter, .fade-leave-to /* .fade-leave-active in below version 2.1.8 */ {
+		  opacity: 0
+		}
+	</style>
+</head>
+<body>
+<div id="app1" >
+	<button v-on:click="show = !show">
+    Toggle
+  </button>
+  <transition name="fade">
+    <p v-if="show">hello</p>
+  </transition>
+  <p v-if="show">hello</p>
+</div>
+
+<script type="text/javascript" src="../vue@2.2.4.js"></script>
+<script type="text/javascript" src="index.js"></script>
+</body>
+</html>

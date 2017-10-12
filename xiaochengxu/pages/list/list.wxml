@@ -1,0 +1,44 @@
+<view class="">
+  <text>{{text}}</text>
+  <button bindtap="changeText">Click Me</button>
+</view>
+<view wx:for="{{list}}" class="list-item">
+  {{index}}:{{item.msg}}
+  <view wx:for="{{list}}" style="color: red;">
+  ----{{index}}:{{item.msg}}
+  </view>
+</view>
+<!--<view wx:for="{{list}}" wx:for-index="i" wx:for-item="dataItem">
+<template is="list-item" data="{{index: i, ...dataItem}}" />
+</view>-->
+<!--<switch wx:for="{{objectArray}}" wx:key="unique" style="display: block;"> {{item.id}} </switch>
+<button bindtap="switch"> Switch </button>
+<button bindtap="addToFront"> Add to the front </button>
+
+<switch wx:for="{{numberArray}}" wx:key="*this" style="display: block;"> {{item}} </switch>
+<button bindtap="addNumberToFront"> Add to the front </button>-->
+
+<!--<template name="list-item">
+{{index}}:{{msg}}
+</template>-->
+
+<!-- Event -->
+<!--<view id="outter" bindtap="handleTap1">
+  outer view
+  <view id="middle" catchtap="handleTap2">
+    middle view
+    <view id="inner" bindtap="handleTap3">
+      inner view
+    </view>
+  </view>
+</view>-->
+
+<!-- Reference -->
+<!--<include src="../../shared/header.wxml"/>
+<import src="../../templates/common.wxml"/>
+<template is="common" />-->
+
+<!-- WXSS -->
+<text style="font-size:{{style.fontSize}}">
+Hello WXSS
+</text>
