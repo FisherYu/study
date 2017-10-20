@@ -1,0 +1,3 @@
+var gPersion = {
+	name: 'john'
+}
