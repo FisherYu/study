@@ -1,0 +1,101 @@
+<!-- 列表 -->
+<view class="button-add-passenger" bindtap="addPassenger">
+	<icon class="ico-add" type="ctripIcon"/>
+	<text>新增旅客</text>
+</view>
+<scroll-view scroll-y="true" class="passenger-box" bindscrolltolower="moreDetail">
+	<block wx:for="{{passengers}}" wx:key="PassengerID">
+		<view class="passenger-list {{item.view.isselected == 1 ? 'passenger-list_selected' : ''}}" data-idx="{{index}}" data-pid="{{item.PassengerID}}" bindtap="selectDetail">
+			<icon class="ico-edit ico-pos" type="ctripIcon" data-pid="{{item.PassengerID}}" catchtap="editPassegner"/>
+			<text class="passenger-name">{{item.CNName}} {{item.ENLastName}}{{(item.ENLastName+item.ENFirstName)!='' ? '/' : ''}}{{item.ENFirstName}} {{item.ENMiddleName}}</text>
+			<block wx:for="{{item.view.cardshow}}" wx:key="item" wx:for-item="itemcard">
+				<text class="passenger-info">{{itemcard}}</text>
+			</block>
+			<text wx:if="{{item.view.cardshow.length == 0 && item.PassengerType != 'C'}}" class="passenger-info passenger-info_blue">请补充证件信息</text>
+			<icon class="ico-circle ico-pos_circle" color="{{item.view.isselected == '1' ? '#099fde':''}}"  type="{{item.view.cantselect == 1 ? 'cancel' : (item.view.isselected == '1' ? 'success':'circle')}}"/>
+		</view>
+	</block>
+</scroll-view>
+<view class="section-fixed_bottom">
+	<button class="{{okButtonStatus == 1 ? 'btn-primary':'btn-disabled'}}" hover-class="{{okButtonStatus == 1 ? 'btn-primary_hover':''}}" disabled="{{okButtonStatus == 1 ? false:true}}" catchtap="finishClick">完成 ({{selectCntNow}})</button>
+</view>
+
+<!-- 编辑 -->
+<!-- 遮罩层 -->
+<view class="mask" hidden="{{editPageHidden}}"></view>
+<!-- 新增旅客 -->
+<view class="section-text-warp" style="z-index: 15" hidden="{{editPageHidden}}">
+	<view class="section-text-close" bindtap="closeEditPage">关闭</view>
+	<text class="section-text-title">{{editPageTitle}}</text>
+	<view class="section-text-done" bindtap="finishEdit">完成</view>
+
+	<view  class="section-text-scroll">
+		<view class="tips_top" hidden="{{topWarnTipHidden}}">请输入正确的旅客信息</view>
+		<scroll-view class="section-add-scroll" scroll-y="true">
+			<view class="section-add">
+				<view class="passenger-item">
+					<label class="passenger-item_title {{isWrongList[0].iswrong == 1?'passenger-item_title-error':''}}">姓名</label>
+					<input class="passenger-item_input passenger-item_input-tel" placeholder="确保与证件保持一致" type="text" maxlength="50" placeholder-class="passenger-item_input-placeholder" value="{{oPassenger.CNName}}" bindchange="cnnameChange"/>
+				</view>
+				<view class="passenger-item">
+					<label class="passenger-item_title {{isWrongList[1].iswrong == 1?'passenger-item_title-error':''}}">英文姓</label>
+					<input class="passenger-item_input"  placeholder="拼音姓/Surname" type="text" maxlength="50" placeholder-class="passenger-item_input-placeholder" value="{{oPassenger.ENLastName}}" bindchange="enlastnameChange"/>
+				</view>
+				<view class="passenger-item">
+					<label class="passenger-item_title {{isWrongList[2].iswrong == 1?'passenger-item_title-error':''}}">英文名</label>
+					<input class="passenger-item_input"  placeholder="拼音名/Givenname" type="text" maxlength="50" placeholder-class="passenger-item_input-placeholder" value="{{oPassenger.ENFirstName + (oPassenger.ENMiddleName!=''?' ':'') + oPassenger.ENMiddleName}}" bindchange="enfirstnameChange"/>
+				</view>
+				<view class="passenger-item">
+					<label class="passenger-item_title {{isWrongList[9].iswrong == 1?'passenger-item_title-error':''}}">旅客类型</label>
+					<view class="passenger-item_input passenger-item_input-sex">
+						<text class="sex-text {{oPassenger.PassengerType == 'A' ? 'sex-text_selected' : ''}}" bindtap='typeAdult'>成人</text>|
+						<text class="sex-text {{oPassenger.PassengerType == 'C' ? 'sex-text_selected' : ''}}" bindtap='typeChild'>儿童</text>
+					</view>
+				</view>
+				<view class="passenger-item" hidden="{{cardTypeHidden}}">
+					<label class="passenger-item_title {{isWrongList[3].iswrong == 1?'passenger-item_title-error':''}}">证件类型</label>
+					<view class="passenger-item_input passenger-item_input-arrow" bindtap="changeCard">{{oPassenger.viewCardTypeCN}}</view>
+				</view>
+				<view class="passenger-item" hidden="{{cardNoHidden}}">
+					<label class="passenger-item_title {{isWrongList[4].iswrong == 1?'passenger-item_title-error':''}}">证件号码</label>
+					<input class="passenger-item_input" id="idCardNo" placeholder="与证件上一致" bindchange="changeCardNo" id="idcard" type="{{oPassenger.viewCardType==1?'idcard':'text'}}" maxlength="50" placeholder-class="passenger-item_input-placeholder" data-cardid="{{oPassenger.viewCardType}}" value="{{oPassenger.viewCardNo}}"/>
+				</view>
+				<view class="passenger-item" hidden="{{cardLimitHidden}}">
+					<label class="passenger-item_title {{isWrongList[5].iswrong == 1?'passenger-item_title-error':''}}">证件有效期</label>
+					<picker mode="date" value="{{oPassenger.viewCardTimelimit}}" bindchange="cardTimelimitChange" class="passenger-item_input passenger-item_input-arrow {{oPassenger.viewCardTimelimit=='' ? 'passenger-item_input-picker':''}}">
+						<view class=" {{isWrongList[5].iswrong == 1?'passenger-item_title-error':''}}">{{oPassenger.viewCardTimelimit=='' ? '请确保有效期大于6个月' : oPassenger.viewCardTimelimit}}</view>
+					</picker>
+				</view>
+				<view class="passenger-item">
+					<label class="passenger-item_title {{isWrongList[6].iswrong == 1?'passenger-item_title-error':''}}">国籍</label>
+					<picker mode="selector" value="{{allCountryIndex}}" range="{{allCountryName}}" bindchange="nationChange" class="passenger-item_input passenger-item_input-arrow {{oPassenger.viewNationality=='' ? 'passenger-item_input-picker':''}}">
+						<view class=" {{isWrongList[6].iswrong == 1?'passenger-item_title-error':''}}">{{oPassenger.viewNationality=='' ? '请选择国籍' : oPassenger.viewNationality}}</view>
+					</picker>
+				</view>
+				<view class="passenger-item">
+					<label class="passenger-item_title {{isWrongList[7].iswrong == 1?'passenger-item_title-error':''}}">性别</label>
+					<view class="passenger-item_input passenger-item_input-sex">
+						<text class="sex-text {{oPassenger.Gender == 'M' ? 'sex-text_selected' : ''}}" bindtap='genderMale'>男</text>|
+						<text class="sex-text {{oPassenger.Gender == 'F' ? 'sex-text_selected' : ''}}" bindtap='genderFemale'>女</text>
+					</view>
+				</view>
+				<view class="passenger-item">
+					<label class="passenger-item_title {{isWrongList[8].iswrong == 1?'passenger-item_title-error':''}}">出生日期</label>
+					<picker mode="date" class="" value="{{oPassenger.Birthday}}" start="1890-01-01" end="2030-12-31" bindchange="birthdayChange" class="passenger-item_input passenger-item_input-arrow {{oPassenger.Birthday=='' ? 'passenger-item_input-picker':''}}">
+						<view class="passenger-item_input {{isWrongList[8].iswrong == 1?'passenger-item_title-error':''}}">{{oPassenger.Birthday=='' ? '请输入出生日期' : oPassenger.Birthday}}</view>
+					</picker>
+				</view>
+			</view>
+		</scroll-view>
+	</view>
+</view>
+
+<!-- 蒙层证件类型 -->
+<view class="mask" style="z-index: 20" hidden="{{cardTypeSelectorHidden}}" bindtap="notSelectedCard"></view>
+<view class="idcard-list" style="z-index: 30" hidden="{{cardTypeSelectorHidden}}">
+	<block wx:for="{{cardTypeList}}" wx:key="id">
+		<view class="idcard-item {{oPassenger.viewCardType == item.id ? 'idcard-item_selected':''}}" data-id="{{item.id}}" bindtap="selectedCard">{{item.name}}
+			<icon wx:if="{{oPassenger.viewCardType == item.id}}" color="#099fde" size="14" type="success_no_circle" class="icon-selected"/>
+		</view>
+	</block>
+</view>

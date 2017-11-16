@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>Vue Class Style</title>
+	<style rel="style/sheet">
+		.error {
+			color: red;
+		}
+		.waring {
+			color: yellow;
+		}
+		.large {
+			font-size: 16px;
+		}
+	</style>
+</head>
+<body>
+<div id="vueDemo">
+	<div>
+		<!-- 值根普通JS对象的属性值一样，可以是任意合法的单一表达式。把class 名字作为属性名更灵活！-->
+		<div class="large" v-bind:class="{error: type === 1, waring: !type}">{{msg}}</div>
+		<!-- 把数组元素的值集合作为class的值，每个数组元素都是合法的表达式, 当元素是对象时，则规则同class去值对象 -->
+		<div v-bind:class="[waring, 'large', {error: type, test: type}]">{{msg}}</div>
+		<div v-bind:style="{color: '#ccc',fontSize: '20px'}">{{msg}}</div>
+		
+		<button v-on:click="update">Upate</button>
+	</div>
+</div>
+<script type="text/javascript" src="https://unpkg.com/vue@2.2.4/dist/vue.js"></script>
+<script type="text/javascript">
+	;(function(){
+		
+		var vm = new Vue({
+			el: '#vueDemo',
+			methods: {
+			},
+			data: {
+				msg: 'error',
+				type: 1,
+				error: 'error',
+				waring: 'waring'
+			},
+			methods: {
+				update: function() {
+					this.type = this.type^1;
+				}
+			},
+			computed: {
+				
+			}
+		});
+		
+	})()
+</script>
+</body>
+</html>
+<!-- 
+1. 插值
+2. 属性
+	bool值属性： checked，disabled
+	单值属性
+	多值属性
+3. 指令（指令属性）
+概念：特殊的属性，本质上还是属性（具有属性的特性，属性名称<String>，属性值<String>）
+属性值：单个js表达式
+指令参数
+指令修饰符
+4. 过滤器（简单的文本格式化方式）
+
+-->

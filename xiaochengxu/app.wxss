@@ -1,0 +1,42 @@
+/**app.wxss**/
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;
+  box-sizing: border-box;
+} 
+
+.flex-wrp {
+  display: flex;
+}
+.flex-item {
+  width: 300px;
+  height: 300px;
+}
+.bc_green {
+  background-color: green;
+}
+.bc_red {
+  background-color: red;
+}
+.bc_yellow {
+  background-color: yellow;
+}
+.bc_blue {
+  background-color: blue;
+}
+.scroll-view_H {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  /*align-items: center;
+  justify-content: space-between;*/
+}
+.scroll-view-item_H {
+  width: 200px;
+  height: 100px;
+  flex: 50%;
+}

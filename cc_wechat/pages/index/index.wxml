@@ -1,0 +1,13 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="image-wrap">
+    <image mode="widthFix"src="https://pic.c-ctrip.com/picaresonline/creditcard/pic/h5/images/homepage_header.407df3c2.png"></image>
+  </view>
+  <view class="image-wrap homepage-ad-space">
+    <image mode="widthFix" src="https://pic.c-ctrip.com/picaresonline/creditcard/pic/h5/images/homepage_enjoy.a6e6861d.jpg"></image>
+    <image mode="widthFix" src="https://pic.c-ctrip.com/picaresonline/creditcard/pic/h5/images/homepage_exchange.6d167fa2.jpg"></image>
+  </view>
+  <view class="apply-btn-wrap" bindtap="applyCardHandle">
+    <button>我要办卡</button>
+  </view>
+</view>

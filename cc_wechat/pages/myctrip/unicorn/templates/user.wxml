@@ -1,0 +1,21 @@
+<template name="user">
+    <view class="user-info {{hasBg ? 'user-info_whitebg' : ''}}">
+        <view class="user-service">
+            <text class="ico-phone" type="ctripIcon" ></text>
+            <text bindtap="makeCall">联系客服</text>
+        </view>
+        <view class="user-desc">
+            <text class="user-name">您好，{{userName}}</text>
+            <text class="user-exit" bindtap="logout" data-ubt-key="myctrip-logout">退出</text>
+        </view>
+    </view>
+</template>
+
+<template name="unLogin">
+    <!-- <icon type="warn" size="93" color="#C9C9C9" class="failure-page_icon" /> -->
+    <view class="slogn">
+        <image src="http://pic.c-ctrip.com/h5/myctrip/abctrip_logo.png" class="ctrip_slogan"></image>
+    </view>
+    <button class="btn-primary failure-page_btn" bindtap="goToLogin">登录携程，开启旅程</button>
+    
+</template>

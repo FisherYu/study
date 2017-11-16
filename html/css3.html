@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CSS3 Selector</title>
+	<style type="text/css">
+		:root {
+			border: 1px solid #ccc;
+		}
+		.item:nth-of-type(2n+1) {
+			color: red;
+		}
+		/*.item:nth-child(2n+1) {
+			color: red;
+		}*/
+	</style>
+</head>
+<!-- 
+an, an+0, an-0, an+a, an-n是等效
+a和b没有大小限制，
+an 和 -an是不同的
+-->
+<body>
+<div>
+	<div class="item">1</div>
+	<div class="item">2</div>
+	<div class="item">3</div>
+	<div class="item">4</div>
+	<div class="item">5</div>
+	<p class="item">15</p>
+	<p class="item">16</p>
+	<p class="item">17</p>
+	<p class="item">18</p>
+	<p class="item">19</p>
+</div>
+ <ul>
+ 	<li>1</li>
+ 	<li>2</li>
+ 	<li>3</li>
+ 	<li>4</li>
+ 	<li>5</li>
+ 	<li>6</li>
+ 	<li>7</li>
+ 	<li>8</li>
+ 	<li>11</li>
+ 	<li>12</li>
+ 	<li>13</li>
+ 	<li>14</li>
+ 	<li>15</li>
+ 	<li>16</li>
+ 	<li>17</li>
+ 	<li>18</li>
+ </ul>
+ <ul>
+ 	<li>1</li>
+ 	<li>2</li>
+ 	<li>3</li>
+ 	<li>4</li>
+ 	<li>5</li>
+ 	<li>6</li>
+ 	<li>7</li>
+ 	<li>8</li>
+ 	<li>11</li>
+ 	<li>12</li>
+ 	<li>13</li>
+ 	<li>14</li>
+ 	<li>15</li>
+ 	<li>16</li>
+ 	<li>17</li>
+ 	<li>18</li>
+ </ul>
+</body>
+</html>

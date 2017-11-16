@@ -1,0 +1,38 @@
+<view>
+    <view class="calendar-week {{tips ? 'calendar-week_tips' : ''}}" >
+	     <view wx:if="{{ tips }}" class="calendar-module_tips-show">{{tips}}</view>
+    	<block wx:for="{{ DAY_NAMES }}">
+			<view class="calendar-week_item {{ index === 0 || index === 6  ? 'calendar-week_sun' : '' }}">{{item}}</view>
+		</block>
+    </view>
+
+	<scroll-view class="body" scroll-into-view="{{ scrollToID }}" scroll-y="true">
+		<block wx:for="{{ monthDates }}" wx:key="monthID">
+		    <view class="calendar-month {{tips ? 'calendar-month_tips' : ''}}" id="{{ item.monthID }}" >
+		        {{ item.monthName }}
+		    </view>
+
+		    <view class="calendar-month_items ">
+		        <view   wx:for="{{ item.dates }}"  wx:for-item="dateItem" class="calendar-day" >
+					<view class="{{ dateItem.choose ? 'calendar-item_checkin' : ''}} calendar-bg " > </view>
+					<view class="calendar-info_box">
+						<text class="{{dateItem.choose ? 'calendar-txt_checkin' : '' }} calendar-txt " wx:if="{{ dateItem.today }}">今天</text>
+						<text class="calendar-txt" wx:elif="{{ dateItem.holiday && !dateItem.outOfRange}}">{{ dateItem.holiday }}</text>
+						<text class="calendar-txt {{ dateItem.outOfRange ? 'out-of-range' : '' }}" wx:elif="{{ dateItem.holiday }}">{{ dateItem.holiday }}</text>
+						<block>
+			            	<text class="calendar-txt" wx:if="{{ !dateItem.date }}"></text>
+			            	<text wx:elif="{{ dateItem.outOfRange && !dateItem.holiday && !dateItem.today }}" class="calendar-txt out-of-range">{{ dateItem.date }}</text>
+			            	<text wx:elif="{{ !dateItem.holiday && !dateItem.today}}"  class=" calendar-txt {{dateItem.choose ? 'calendar-txt_checkin' : '' }}" >{{ dateItem.date }}</text>
+						</block>
+						<text wx:if="{{ dateItem.info.title }}" class=" calendar-price  {{dateItem.choose ? 'calendar-price_checkin' : '' }}">{{ dateItem.info.title }}</text>
+						<text wx:if="{{ dateItem.info.subTitle }}" class=" calendar-title calendar-checkin">{{ dateItem.info.subTitle }}</text>
+		        	</view>
+					<view wx:if="{{ dateItem.workday }}" class="calendar-work">班</view>
+					<view wx:if="{{ dateItem.restday }}" class="calendar-rest">休</view>
+					<view wx:if="{{ dateItem && !dateItem.outOfRange}}" class="calendar-bg" bindtap="onDateTap" data-date="{{ dateItem.value }}"></view>
+				</view>
+		    </view>
+		</block>
+	</scroll-view>
+
+</view>

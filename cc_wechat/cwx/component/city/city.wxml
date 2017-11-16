@@ -1,0 +1,83 @@
+<view  wx:if="{{isSearchView}}" class="search-module search-module_focus">
+	<icon class="ico-search search-module_ico search-module_ico_focus" type="ctripIcon" />
+<input class="search-module_input search-module_input-f" placeholder-class="search-module_input_focus" placeholder="中文/拼音/首字母" value="{{inputKeyword}}" type="text" bindinput="searchInput"  focus="true"/>	<icon type="clear" class="search-module_clear color-gray_666" size="16" bindtap="searchClear"/>
+	<text class="search-module_cancel" bindtap="searchCancel">取消</text>
+	<view class="search-list">
+		<view wx:for="{{searchResult}}" wx:for-item="item" class="search-list_item">
+			<text class="city-module_name" bindtap="cityTap" data-cityname="{{item.cityName}}" data-section="search" data-row="{{index}}">{{item.cityName}}</text>
+		</view>
+	</view>
+</view>
+
+<block wx:if='{{ isSearchView === false}}'>
+<view class="search-module" >
+	<icon class="ico-search search-module_ico" type="ctripIcon" />
+	<input  class="search-module_input" placeholder-class="search-module_input_focus" placeholder="中文/拼音/首字母" value="{{inputKeyword}}" type="text" bindinput="searchInput" bindfocus="searchFocus" disabled='true'/>
+	<view  bindtap='gotoSearch' style='position:absolute;top:0;right:0;bottom:0;left:0; background-color:clear;z-index:100;'></view>
+</view> 
+
+<block wx:if="{{showInter}}">
+<view wx:if="{{currentTab == 1}}" class="tab-module">
+	<view class="tab-item" bindtap="inlandTabClick">
+		<text class="tab-text">国内城市</text>
+	</view>
+	<view class="tab-item tab-item_current" bindtap="interTabClick">
+		<text class="tab-text">国际城市</text>
+	</view>
+</view>
+<view wx:else class="tab-module">
+	<view class="tab-item tab-item_current" bindtap="inlandTabClick">
+		<text class="tab-text">国内城市</text>
+	</view>
+	<view class="tab-item" bindtap="interTabClick">
+		<text class="tab-text">国际城市</text>
+	</view>
+</view>
+</block>
+
+<view wx:if="{{loadDataFinish}}" class="city-module">
+	<view class="city-module_letter">
+		<text wx:if="{{isShowCurrentPosition && currentCity.cityName.length > 0}}" class="city-module_letter-item1" bindtap="tagTap" data-citytag="positon">当前</text>
+		<text wx:if="{{currentTabCities.historyCities.length > 0}}" class="city-module_letter-item1" bindtap="tagTap" data-citytag="history">历史</text>
+		<text wx:if="{{ currentTabCities.hotCities && currentTabCities.hotCities.length > 0}}" class="city-module_letter-item1" bindtap="tagTap" data-citytag="hot">热门</text>
+        <view wx:for="{{ cityTags }}" wx:for-item="i" wx:key="index">
+        	<text class="city-module_letter-item1" bindtap="tagTap" data-citytag="{{i}}">{{i}}</text>
+        </view>
+	</view>
+
+	<scroll-view scroll-y="true" class="city-module_list"   bindscrolltolower="handlerScrollLower"  scroll-into-view="{{toView}}" style="top:{{showInter ? \"182rpx\":\"88rpx\"}}">
+		<block wx:if="{{isShowCurrentPosition}}">
+			<view wx:if="{{currentCity.cityName.length > 0}}" id="positon" class="city-module_type">当前</view>
+			<view wx:if="{{currentCity.cityName.length > 0}}" class="city-module_items">
+				<text class="city-module_name1" data-cityname="{{currentCity.cityName}}" bindtap="cityTap">{{currentCity.cityName}}</text>
+				<text wx:if="{{currentCity.title}}" style="line-height: 60rpx;max-height: 120rpx;overflow: hidden;text-overflow:ellipsis;display: block;">{{currentCity.title}}</text>
+			</view>
+		</block>
+			<view wx:if="{{ currentTabCities.historyCities && currentTabCities.historyCities.length > 0}}" id="history" class="city-module_type">历史选择</view>
+			<view wx:if="{{ currentTabCities.historyCities && currentTabCities.historyCities.length > 0}}" class="city-module_items">
+            	<block wx:for="{{currentTabCities.historyCities}}" wx:key="cityName">
+                    <text class="city-module_name1"  bindtap="cityTap" data-cityname="{{item.cityName}}" data-section="historyCities" data-row="{{index}}">{{item.cityName}}</text>
+            	</block>
+			</view>
+			<view wx:if="{{currentTabCities.hotCities && currentTabCities.hotCities.length > 0}}" id="hot" class="city-module_type">热门城市</view>
+			<view wx:if="{{currentTabCities.hotCities && currentTabCities.hotCities.length > 0}}" class="city-module_items">
+				<block wx:for="{{currentTabCities.hotCities}}" wx:key="cityName">
+                    <text class="city-module_name1" bindtap="cityTap" data-cityname="{{item.cityName}}" data-section="hotCities" data-row="{{index}}">{{item.cityName}}</text>
+            	</block>
+			</view>
+        	<block wx:for="{{ currentTabCities.cityTags }}" wx:for-item="i" wx:key="index">
+        		<view id="{{i}}" class="city-module_type" bindtap="tagTap" data-citytag="{{i}}">{{i}}</view>
+				<block wx:if="{{isFoldShow}}">
+            		<view wx:if="{{currentTag == i}}" class="city-module_items" wx:for="{{currentTabCities.cityMainList[i]}}" wx:for-item="item" wx:key="cityName">
+            			<text class="city-module_name" bindtap="cityTap" data-cityname="{{item.cityName}}" data-section="{{i}}" data-row="{{index}}">{{item.cityName}}</text>
+            		</view>
+				</block>
+				<block wx:else>
+					<view class="city-module_items" wx:for="{{currentTabCities.cityMainList[i]}}" wx:for-item="item" wx:key="cityName">
+            			<text class="city-module_name" bindtap="cityTap" data-cityname="{{item.cityName}}" data-section="{{i}}" data-row="{{index}}">{{item.cityName}}</text>
+            		</view>
+				</block>
+       	 	</block>
+	</scroll-view>
+</view>
+</block>

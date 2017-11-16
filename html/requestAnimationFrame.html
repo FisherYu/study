@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+	<style type="text/css">
+		.wrap {
+			position: relative;
+		}
+		.box {
+			/*position: absolute;*/
+			background: red;
+			font-size: 2rem;
+		}
+	</style>
+</head>
+<body>
+<div class="wrap">
+	<div id="SomeElementYouWantToAnimate" class="box"></div>
+	<div id="countDown" class="box"></div>
+	<div id="countDown3" class="box"></div>
+</div>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+<script type="text/javascript" src="countDown.js"></script>
+<script type="text/javascript">
+	window.requestAnimationFrame = window.requestAnimationFrame 
+	|| window.mozRequestAnimationFrame 
+	|| window.webkitRequestAnimationFrame 
+	|| window.msRequestAnimationFrame;
+
+
+// CountDown1
+$('#SomeElementYouWantToAnimate').countdown({
+	type: "timeRemain",
+	timeRemain:  1000 * 60 * 60,
+	handleData: function() {
+
+	},
+	endCallback: function() {
+		console.log('end call back');
+	}
+})
+
+function fixTimePart(timePart){
+	return ('0' + timePart).slice(-2);
+}
+function formatTime(seconds) {
+	var sec = seconds % 60;
+	var mins = parseInt(seconds / 60) % 60;
+	var hour = parseInt(mins / 60) % 24;
+	return [fixTimePart(hour), fixTimePart(mins), fixTimePart(sec)].join(':')
+}
+
+var gNow = parseInt(Date.now()/1000);
+// CountDown2
+(function(){
+	var d = document.getElementById('countDown');
+	var count = 0,
+		index = 0,
+		delta = 0;
+	var countFunc = function() {
+		var currentTime = Date.now();
+		var t = window.setTimeout(function(){
+			var timeSpan = Date.now() - currentTime;
+			var timeSpanCount = window.Math.max(1, parseInt(timeSpan / 1000));
+			delta += timeSpan - 1000;
+			console.log(++index + ' > Count2 delta=' + delta)
+			count += 1;//timeSpanCount;
+			// if(count <= 0) {
+			// 	clearTimeout(t);
+			// 	return;
+			// }
+			d.innerText = formatTime(gNow + count);
+			countFunc();
+		}, 1000);
+	}
+	countFunc();
+})()
+
+// CountDown3
+;(function(){
+	var d = document.getElementById('countDown3');
+	var count = 0,
+		index = 0,
+		delta = 0;
+	var countFunc = function() {
+		var pre = Date.now();
+		var t = window.setTimeout(function(){
+			var now = Date.now();
+			var gap = Math.max(0, 15 - (now - pre));
+			console.log(gap)
+			var timeSpan = now + gap - pre;
+			var timeSpanCount = window.Math.max(1, parseInt(timeSpan / 1000));
+			delta += timeSpan - 1000;
+			console.log(++index + ' > Count3 delta=' + delta)
+			count += timeSpanCount;
+			d.innerText = formatTime(gNow + count);
+			pre = now + gap;
+			// if(count <= 0) {
+			// 	clearTimeout(t);
+			// 	return;
+			// }
+			countFunc();
+		}, 1000);
+	}
+	countFunc();
+})()
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>Vue Tempalte</title>
+</head>
+<body>
+<div id="vueDemo">
+	<span>{{a}}</span>
+	<span v-once>{{a}}</span>
+	<span>{{h}}</span>
+	<span v-html="h"></span>
+	<input type="text" v-bind:value="a" v-bind:disabled="a%2 === 0">
+	<button v-on:click="updateHandle">Update</button>
+	<div>
+		<h2>Filter</h2>
+		<div>{{msg | toUpper}}</div>
+		<div>{{msg | toUpperIndex(1)}}</div>
+		<input type="text" v-model:value="msg">
+	</div>
+</div>
+<script type="text/javascript" src="https://unpkg.com/vue@2.2.4/dist/vue.js"></script>
+<script type="text/javascript">
+	;(function(){
+		var data = {a: 2};
+		var vm = new Vue({
+			el: '#vueDemo',
+			methods: {
+				updateHandle: function() {
+					this.a++;
+				}
+			},
+			data: {
+				a: 2,
+				h: '<h2>yoo</h2>',
+				msg: ''
+			},
+			filters: {
+				toUpper: function(txt) {
+					return txt.toUpperCase();
+				},
+				toUpperIndex: function(txt, index){
+					return index + txt.toUpperCase();
+				}
+			}
+		});
+		
+	})()
+</script>
+</body>
+</html>
+<!-- 
+1. 插值
+2. 属性
+	bool值属性： checked，disabled
+	单值属性
+	多值属性
+3. 指令（指令属性）
+概念：特殊的属性，本质上还是属性（具有属性的特性，属性名称<String>，属性值<String>）
+属性值：单个js表达式
+指令参数
+指令修饰符
+4. 过滤器（简单的文本格式化方式）
+
+-->

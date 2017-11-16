@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>Vue Tempalte</title>
+</head>
+<body>
+<div id="vueDemo">
+	<ul>
+		<li v-for="(todo, index) in todos">
+			<ul>
+				<li v-for="(part, pindex) in todo">
+					<input type="text" v-model="todos[index][pindex].name">
+				</li>
+			</ul>			
+		</li>
+	</ul>
+	<div>
+		<ul>
+			<li v-for="(todo, index) in todos">
+				<ul>
+					<li v-for="(part, pindex) in todo">
+						<input 
+						type="text" 
+						v-bind:id="'input_' + index + '_' + pindex" 
+						v-bind:value="todos[index][pindex].name" 
+						v-on:input="updateValue('input_' + index + '_' + pindex, $event.target.value, todos[index][pindex])">
+					</li>
+				</ul>	
+				<a href="javascript:;" v-on:click="removeParam(index)" v-bind:data-index="index">Del</a>		
+			</li>
+		</ul>
+	</div>
+	<button v-on:click="save">Save</button>
+</div>
+<script type="text/javascript" src="https://unpkg.com/vue@2.2.4/dist/vue.js"></script>
+<script type="text/javascript">
+	;(function(){
+		var data = {a: 2};
+		var vm = new Vue({
+			el: '#vueDemo',
+			methods: {
+				save: function() {
+					console.log('save');
+				},
+				updateValue: function(id, value, part) {
+					value += '$'
+					document.getElementById(id).value = value;
+						part.name = value;
+				},
+				removeParam(index){
+					this.todos.splice(index,1);
+				}
+			},
+			data: {
+				todos: [[{name: 1},{name:1}],[{name: 2},{name:2}],[{name:3},{name:3}]]
+			}
+		});
+		
+	})()
+</script>
+</body>
+</html>

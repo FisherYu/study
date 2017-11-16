@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<div id="indicatorContainer"></div>
+<input type="button" id="js_up" value="UP">
+<input type="button" id="js_down" value="DOWN">
+<script type="text/javascript" src="radialIndicator.js"></script>
+<script type="text/javascript">
+	var p = 48000;
+	var r = radialIndicator('#indicatorContainer', {
+        barColor: '#87CEEB',
+        barWidth: 10,
+        initValue: 0,
+        radius: window.innerWidth * 0.7 / 2,
+        roundCorner : true,
+        displayNumber: true,
+        precision: 1,
+        minValue: 0,
+    	maxValue: 48000,
+    	startAngle: 155,
+    	endAngle: 25,
+    	frameNum: 100,
+    	format: function(){
+    		return '###,###'
+    	},
+        onChange: function(value) {
+        	console.log(value)
+        }
+    });
+    r.animate(p);
+
+    document.getElementById('js_up').addEventListener('click', function(){
+    	p++;
+    	if(p > 100) {
+    		p = 100;
+    	}
+    	r.value(p);
+    })
+    document.getElementById('js_down').addEventListener('click', function(){
+    	p--;
+    	if(p < 0) {
+    		p = 0;
+    	}
+    	r.value(p);
+    })
+</script>
+</body>
+</html>

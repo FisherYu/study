@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Credit Card Without webpack</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="format-detection" content="telephone=no" />
+  <link rel="apple-touch-startup-image" href="//webresource.c-ctrip.com/ResCRMOnline/R5/html5/images/640.png" sizes="320x460" media="screen and (max-device-width: 320)" />
+  <link rel="apple-touch-startup-image" href="//webresource.c-ctrip.com/ResCRMOnline/R5/html5/images/940.png" sizes="640x920" media="screen and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2)" />
+  <link rel="apple-touch-startup-image" href="//webresource.c-ctrip.com/ResCRMOnline/R5/html5/images/1004.png" sizes="768x1004" media="screen and (min-device-width: 481px) and (orientation:portrait)" />
+  <link rel="apple-touch-icon-precomposed" sizes="57x57" href="//webresource.c-ctrip.com/ResCRMOnline/R5/html5/images/57.png?v=1.0" />
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="//webresource.c-ctrip.com/ResCRMOnline/R5/html5/images/72.png?v=1.0" />
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="//webresource.c-ctrip.com/ResCRMOnline/R5/html5/images/114.png?v=1.0" />
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="//webresource.c-ctrip.com/ResCRMOnline/R5/html5/images/144.png?v=1.0" />
+  <link rel="stylesheet" type="text/css" href="//webresource.c-ctrip.com/styles/h5/common/n_main.css?version=1_0" />
+	<link rel="stylesheet" type="text/css" href="https://m.ctrip.com/webapp/cc/dest/resources/css/card.css?v=0925">
+</head>
+<body>
+<div id="app">
+	<router-view></router-view>
+</div>
+<script type="text/javascript" data-main="./src/app.js" src="./src/lib/require.js"></script>
+<script type="text/javascript" src="//webresource.c-ctrip.com/code/lizard/2.2/web/lite.seed.js" needWeiXin ="true"></script>
+<!-- <script type="text/javascript" src="./src/lizard.seed.js"></script> -->
+<!-- <script type="text/javascript" src="https://webresource.c-ctrip.com/code/lizard/2.2/web/lizard.seed.js"></script> -->
+<!-- <script type="text/javascript" src="./src/app.js"></script> -->
+
+<script type="text/javascript">
+	_qConfig = {
+  "isMaintainingDailyPromotion": "false",
+  "homePageConfig_unapply": "[{\"floorName\":\"高额权益，开卡即享\",\"floorType\":0,\"floorStyle\":0,\"isShowMore\":false,\"showMoreUrl\":\"\",\"textMore\":\"\",\"horizonBlocks\":[{\"isVertical\":false,\"textDescribe\":\"任意刷1笔免首年年费\"},{\"isVertical\":false,\"textDescribe\":\"72小时失卡保障服务\"},{\"isVertical\":false,\"textDescribe\":\"五星酒店自助餐买一赠一\"},{\"isVertical\":false,\"textDescribe\":\"凯悦餐厅珍馐美食8.8折\"},{\"isVertical\":false,\"textDescribe\":\"1元尊享全国机场停车\"},{\"isVertical\":false,\"textDescribe\":\"1600万元高额航空意外险\"}]},{\"floorName\":\"yoyo\",\"floorType\":1,\"floorStyle\":3,\"isShowMore\":false,\"verticalBlocks\":[{\"isVertical\":true,\"imageUrl\":\"https://pic.c-ctrip.com/picaresonline/creditcard/pic/h5/images/index_sale.f488aed0.jpg\",\"jumpUrl\":\"https://m.ctrip.com/webapp/cc/dailypromotionindex\"},{\"isVertical\":true,\"imageUrl\":\"https://pic.c-ctrip.com/picaresonline/creditcard/pic/h5/images/sle_cx.5003cd05.jpg\",\"jumpUrl\":\"https://pages.c-ctrip.com/creditcard/h5/amazingjp/index.html\"},{\"isVertical\":true,\"imageUrl\":\"https://pic.c-ctrip.com/picaresonline/creditcard/pic/h5/images/hp_backcash_bg1000.4bdbb8d5.jpg\",\"jumpUrl\":\"https://m.ctrip.com/webapp/cc/yoyo\"}]},{\"floorName\":\"落地礼/伴手礼\",\"floorType\":1,\"floorStyle\":1,\"isShowMore\":false,\"horizonBlocks\":[{\"isVertical\":false,\"textDescribe\":\"\",\"imageUrl\":\"https://pic.c-ctrip.com/picaresonline/creditcard/pic/h5/images/Landing_ceremony.ed9bfe6f.png\",\"jumpUrl\":\"https://m.ctrip.com/webapp/myrights/creditcard/detail/64\"},{\"isVertical\":false,\"textDescribe\":\"\",\"imageUrl\":\"https://pic.c-ctrip.com/picaresonline/creditcard/pic/h5/images/back_gift.42c9fdab.png\",\"jumpUrl\":\"https://m.ctrip.com/webapp/myrights/creditcard/detail/65\"}]},{\"floorName\":\"美食甄选\",\"floorType\":1,\"floorStyle\":3,\"isShowMore\":true,\"showMoreUrl\":\"https://m.ctrip.com/webapp/myrights/creditcard\",\"verticalBlocks\":[{\"isVertical\":true,\"imageUrl\":\"https://pic.c-ctrip.com/picaresonline/creditcard/pic/h5/images/index_sale_banner.448e51f1.png\",\"jumpUrl\":\"https://m.ctrip.com/webapp/myrights/creditcard/detail/15\"}]}]",
+  "dailyPromotion_shareTitle": "天天低价 不止是五折 立减2000再返1%",
+  "hasHomePageConfig": "false",
+  "yoyo_shareImageUrl": "",
+  "zipList": "010,021,020,0757,0578,0757,0763,0751,0663,0755,0751,0769,0754,0756,0760,0750,0759,0668,0411,0592,029,023,0532,0571,027,025,028,024,022,0991,0551,0311,0512,0512,0520,0371,0451,0731,0871,0574,0531,0510,0591,0771,0791",
+  "shareTitle": "携程白金卡·限量邀请",
+  "yoyo_type": "1",
+  "maintainTipActivity": "系统正在维护中，请稍后再试",
+  "yoyo_shareLinkUrl": "https://m.ctrip.com/webapp/cc/yoyo?bid=1&cid=8&pid=5",
+  "homePageConfig_actived": "[{\"floorName\":\"yoyo\",\"floorType\":1,\"floorStyle\":3,\"isShowMore\":false,\"showMoreUrl\":\"\",\"textMore\":\"\",\"verticalBlocks\":[{\"isVertical\":true,\"imageUrl\":\"https://pic.c-ctrip.com/picaresonline/creditcard/pic/h5/images/index_sale.f488aed0.jpg\",\"jumpUrl\":\"https://m.ctrip.com/webapp/cc/dailypromotionindex\"},{\"isVertical\":true,\"imageUrl\":\"https://pic.c-ctrip.com/picaresonline/creditcard/pic/h5/images/sle_cx.5003cd05.jpg\",\"jumpUrl\":\"https://pages.c-ctrip.com/creditcard/h5/amazingjp/index.html\"},{\"isVertical\":true,\"imageUrl\":\"https://pic.c-ctrip.com/picaresonline/creditcard/pic/h5/images/hp_backcash_bg1000.4bdbb8d5.jpg\",\"jumpUrl\":\"https://m.ctrip.com/webapp/cc/yoyo\"}]},{\"floorName\":\"落地礼/伴手礼\",\"floorType\":1,\"floorStyle\":1,\"horizonBlocks\":[{\"isVertical\":false,\"textDescribe\":\"\",\"imageUrl\":\"https://pic.c-ctrip.com/picaresonline/creditcard/pic/h5/images/Landing_ceremony.ed9bfe6f.png\",\"jumpUrl\":\"https://m.ctrip.com/webapp/myrights/creditcard/detail/64\"},{\"isVertical\":false,\"textDescribe\":\"\",\"imageUrl\":\"https://pic.c-ctrip.com/picaresonline/creditcard/pic/h5/images/back_gift.42c9fdab.png\",\"jumpUrl\":\"https://m.ctrip.com/webapp/myrights/creditcard/detail/65\"}]},{\"floorName\":\"美食甄选\",\"floorType\":1,\"floorStyle\":3,\"isShowMore\":false,\"verticalBlocks\":[{\"isVertical\":true,\"imageUrl\":\"https://pic.c-ctrip.com/picaresonline/creditcard/pic/h5/images/index_sale_banner.448e51f1.png\",\"jumpUrl\":\"https://m.ctrip.com/webapp/myrights/creditcard/detail/15\"}]},{\"floorName\":\"绑卡5元\",\"floorType\":1,\"floorStyle\":3,\"isShowMore\":false,\"verticalBlocks\":[{\"isVertical\":true,\"imageUrl\":\"https://pic.c-ctrip.com/picaresonline/creditcard/pic/h5/images/homepage_wallet.f8dcebc3.jpg\",\"jumpUrl\":\"https://m.ctrip.com/webapp/myrights/creditcard/detail/8\"}]}]",
+  "maintainTipDailyPromotion": "系统正在维护中，请稍后再试",
+  "shareText": "点击立即申卡！消费满额获最高3000机票返现",
+  "PhoneDigitList": "8,8,8,8,7,8,7,7,7,8,7,8,8,7,8,7,7,7,8,7,8,8,8,8,8,8,8,8,8,7,8,8,8,8,8,8,8,8,8,8,8,8,8,7,8",
+  "myRightsDetailUrl": "https://m.ctrip.com/webapp/myrights/creditcard/detail/",
+  "dailyPromotion_shareImageUrl": "https://pic.c-ctrip.com/picaresonline/creditcard/pic/h5/images/dailypromotion_share.8bc3ebcc.jpg",
+  "shareImageUrl": "https://pic.c-ctrip.com/picaresonline/creditcard/pic/h5/images/share.e484f036.jpg",
+  "myRightsUrl": "https://m.ctrip.com/webapp/myrights/creditcard",
+  "yoyo_maxAmount": "5000",
+  "applyCity": "[{#华北#:[#北京#,#石家庄#,#天津#]},{#华东#:[#上海#,#杭州#,#合肥#,#济南#,#南京#,#宁波#,#青岛#,#大连#,#苏州#,#无锡#,#厦门#]},{#华南#:[#广州#,#深圳#,#东莞#,#惠州#,#汕头#,#佛山#,#中山#,#珠海#]},{#西南#:[#重庆#,#成都#,#昆明#]},{#华中#:[#长沙#,#武汉#,#郑州#]},{#东北#:[#哈尔滨#,#沈阳#]},{#西北#:[#西安#]}]",
+  "employeeApplyUrl": "https://m.ctrip.com/webapp/creditcard/index",
+  "dailyPromotion_shareLinkUrl": "https://m.ctrip.com/webapp/cc/dailypromotionindex?bid=1&cid=8&pid=8",
+  "isMaintainingActivity": "false",
+  "yoyo_shareText": "东亚携程白金信用卡年度专属权益：刷遍全球，笔笔返现，最高立返2%，更有机会赢噗噜噗噜长老会的礼物！",
+  "maintainTip": "系统升级中，请稍后再试",
+  "contactBlackList": "爸爸、妈妈、老公、老婆、宝宝、宝贝、爷爷、奶奶、外公、外婆、舅舅、阿姨、姑姑、媳妇、姐姐、姐夫、妈咪、老豆、老爸、老妈、某小姐、某先生",
+  "isMaintaining": "false",
+  "yoyo_shareTitle": "【东亚携程白金信用卡】刷卡笔笔返，赢长老会礼物！",
+  "shareLinkUrl": "",
+  "dailyPromotion_shareText": "迪士尼立减200 ￥50台湾8日环岛游 ￥424普吉岛自由行 携程内的肥水流出来啦~"
+}
+</script>
+</body>
+</html>
