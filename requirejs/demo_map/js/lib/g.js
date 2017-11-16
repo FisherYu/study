@@ -1,0 +1,3 @@
+window.myG = {
+	name: 'myG'
+}

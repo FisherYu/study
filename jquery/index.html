@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>jQuery</title>
+</head>
+<body>
+<h1 id="title">hi jQuery noConflit</h1>
+<script type="text/javascript" src="glib.js"></script>
+<script type="text/javascript" src="../a.libs/jquery.js"></script>
+<script type="text/javascript">
+	;(function() {
+		var text = $('#title').text(); // 变量$是jQuery
+		console.log(text);
+		var j = $.noConflict(); // 新的别名j
+      	// 方式1   
+		console.log(jQuery('#title').text()); // 这里直接使用jQuery变量
+      	// 方式2
+      	console.log(j('#title').text()); // 这里使用新的别名j
+      	// 方式3
+      	;(function($){
+      		console.log(j('#title').text()); // 在立即执行函数里继续使用变量$
+      	})(jQuery) // 变量jQuery当作参数传入
+	})()
+</script>
+</body>
+</html>

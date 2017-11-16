@@ -1,0 +1,8 @@
+@import url("common.css");
+
+/*
+ main.css
+*/
+.app {
+    background: transparent url(../../img/app.png);
+}
