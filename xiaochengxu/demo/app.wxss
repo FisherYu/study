@@ -1,0 +1,27 @@
+/**index.wxss**/
+.list-wrap {
+  display: flex;
+  flex-direction: column;
+  /* align-items: center;  */
+}
+.list-item {
+  line-height: 2rem;
+  text-align: center;
+  position: relative;
+  
+}
+.list-item:not(:last-child) {
+  border-bottom: 1px solid #ddd;
+}
+.list-item::after {
+  position: absolute;
+  width: .8rem;
+  height: .8rem;
+  content: "";
+  border: 1px solid #ddd;
+   border-left: none;
+  border-bottom: none; 
+  transform: rotate(45deg);
+  right: .6rem;
+  top: .6rem;
+}

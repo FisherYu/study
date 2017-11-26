@@ -1,0 +1,5 @@
+<view class="list-wrap">
+  <view wx:for="{{pages}}" data-page="{{item.page}}" bindtap="goTo" class="list-item">
+  {{item.name}}
+  </view>
+</view>
