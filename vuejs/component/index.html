@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		body>div:nth-child(2n) {
+			background: #ccc;
+			margin-top: 10px;
+		}
+	</style>
+</head>
+<body>
+<div id="app1" @click="count++;">
+	<input v-model="myMessage">
+	<h2>{{count}}</h2>
+	<my-div></my-div>
+	<!-- 必须使用kebab(短横线隔开式)命名 -->
+	<!-- v-bind没有参数时不可用简写 -->
+	<!-- 非props属性只加在组件的根DOM元素上。 class,styel会merge操作，其他直接替换-->
+	<my-p v-bind="myMessage" name="john" class="red"></my-p>
+	<div>
+		<p>{{total}}</p>
+		<!-- .native修饰符并不影响v-on命令的取值(所以此处也可以写成total++), 注意只能应用在根元素上 -->
+		<button-counter @click="increseTotal" @click.native="total++"></button-counter>
+		<button-counter @click="total++"></button-counter>
+	</div>
+</div>
+<div id="app2">
+	<div>
+	  <h1>我是父组件的标题</h1>
+	  <app-header>
+	    <p>这是一些初始内容</p>
+	    <p>这是更多的初始内容</p>
+	  </app-header>
+	  <app-header></app-header>
+	  <p>----------------</p>
+	  <app-header />
+	  <app-header>
+	  	<template scope="props">
+	  		<p>这是一些初始内容</p>
+	    	<p>{{props.a}}</p>
+	  	</template>
+	  </app-header>
+	</div>
+</div>
+<div id="app3">
+	<p>
+		<button ref="tab1Btn" @click="switchTab('tab1', $event);">Tab1</button>
+		<button ref="tab2Btn"  @click="switchTab('tab2', $event);">Tab2</button>
+	</p>
+	<component :is="currentTab"></component>
+</div>
+<script type="text/javascript" src="../vue@2.2.4.js"></script>
+<script type="text/javascript" src="index.js"></script>
+</body>
+</html>

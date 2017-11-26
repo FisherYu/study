@@ -1,0 +1,11 @@
+<div class="homepage-header-wrap">
+    <header class="homepage-header js_header_content" :style="style">
+        <span class="homepage-header-back js_back">
+            <i class="homepage-icon-back"></i>
+        </span>
+        <h1 class="homepage-header-title"><%-title%></h1>
+        <%for(var i =0, len = rights.length; i < len; ++i) {%>
+            <%=rights[i].itemFunc()%>
+        <%}%>
+    </header>
+</div>

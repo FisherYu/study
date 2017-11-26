@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" name="viewport" />
+</head>
+<body>
+<div id="verification-code"></div>
+<!--h5-->
+<script type="text/javascript">
+;(function(){if(!window.$_bf||!window.$_bf.loaded){var a=new Date,b="?v="+a.getFullYear()+a.getMonth()+"_"+a.getDate(),a=document.createElement("script");a.type="text/javascript";a.charset="utf-8";a.async=!0;a.src="//webresource.c-ctrip.com/code/ubt/_mubt.min.js"+b;b=document.getElementsByTagName("script")[0];b.parentNode.insertBefore(a,b)}})();
+</script>
+<script src="//webresource.c-ctrip.com/ares/infosec/captcha/~2.4.0/default/js/captcha.min.js?expires=1d"></script>
+
+<script type="text/javascript">
+	var slidObj = new slidingVerification({
+        id: "verification-code", // 验证码DIV的id
+		appId: '100002486', // appId 注意 这里的appid需要填写和过来申请的appid一致，不是写你们前端的appid！！！
+		businessSite: 'login', // businessSite
+		width: '280px', // 可选填像素字符串或百分数字符串，如'280px'或'80%'，默认值'280px'
+		resultHandler: function(e) {
+        	console.log("token:", e.token, 'e.checkState:', e.checkState, 'e.version', e.version);
+  		}
+	});
+</script>
+</body>
+</html>

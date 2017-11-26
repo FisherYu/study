@@ -1,0 +1,12 @@
+<template name="rcon">
+    <view class="order-rcon">
+        <view class="order-price {{item.baseData.cancelClass}}">
+            <text class="price-yen">{{item.baseData.orderCurrency}}</text>
+            <text class="price-num">{{item.baseData.orderTotalPrice}}</text>
+        </view>
+        <!-- 循环状态 -->
+        <block wx:for="{{item.baseData.orderStatus}}" wx:for-item="statusItem" wx:key="for-order-status">
+            <view class="order-status {{item.baseData.cancelClass}}">{{statusItem.statusName}}</view>
+        </block>
+    </view>
+</template>

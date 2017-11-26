@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>Vue Computed</title>
+</head>
+<body>
+<div id="vueDemo">
+	<div>
+		<h2>Computed</h2>
+		<div>{{msg | toUpper}}</div>
+		<div>{{reverseMsg | toUpper}}</div>
+		<!-- this.msg 变化时方法也会自动调用？ 值变化引发重现渲染，导致方法调用 -->
+		<div>{{reverse() | toUpper}} </div>
+		<input type="text" v-model:value="msg">
+		<!-- 计算属性值变化依赖被依赖属性值的变化, 被依赖属性必须是Vue的实例属性？ -->
+		<div>Computed:	{{now}}</div>
+		<div>Method:	{{nowM()}}</div>
+		<div>a: {{a}}</div>
+		<button v-on:click="update">Upate</button>
+	</div>
+</div>
+<script type="text/javascript" src="https://unpkg.com/vue@2.2.4/dist/vue.js"></script>
+<script type="text/javascript">
+	;(function(){
+		var data = {a: 2};
+		var a=0;
+		var vm = new Vue({
+			el: '#vueDemo',
+			methods: {
+			},
+			data: {
+				msg: ''
+			},
+			methods: {
+				reverse: function() {
+					return this.msg.split('').reverse().join('');
+				},
+				nowM: function() {
+					return Date.now();ß
+				},
+				update: function() {
+					a++;
+				}
+			},
+			filters: {
+				toUpper: function(txt) {
+					return txt.toUpperCase();
+				}
+			},
+			computed: {
+				reverseMsg: function(txt){
+					return this.msg.split('').reverse().join('');
+				},
+				now: function() {
+					return Date.now();
+				},
+				a: function() {
+					return a;
+				}
+			}
+		});
+		
+	})()
+</script>
+</body>
+</html>
+<!-- 
+1. 插值
+2. 属性
+	bool值属性： checked，disabled
+	单值属性
+	多值属性
+3. 指令（指令属性）
+概念：特殊的属性，本质上还是属性（具有属性的特性，属性名称<String>，属性值<String>）
+属性值：单个js表达式
+指令参数
+指令修饰符
+4. 过滤器（简单的文本格式化方式）
+
+-->

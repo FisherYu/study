@@ -1,0 +1,13 @@
+<div>
+    <!-- head start -->
+    <div class="js_header_wrap">
+    </div>
+    <!-- Content -->
+    <unapply-content v-if="viewType === 1">
+    	<page-content :floors="floors"></page-content>
+    </unapply-content>
+    <applied-content v-if="viewType === 2"></applied-content>
+    <actived-content v-if="viewType === 3">
+    	<page-content :floors="floors"></page-content>
+    </actived-content>
+</div>

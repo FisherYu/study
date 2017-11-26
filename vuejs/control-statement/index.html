@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>Vue Class Style</title>
+	<style rel="style/sheet">
+		.error {
+			color: red;
+		}
+		.waring {
+			color: yellow;
+		}
+		.large {
+			font-size: 16px;
+		}
+	</style>
+</head>
+<body>
+<div id="vueDemo">
+	<div>
+		<div v-if="type === 1" class="error">{{msg}}</div>
+
+		<div v-show="type === 1" class="error">{{msg}}</div>
+		<!-- template会被忽略的 -->
+		<template v-show="type === 1">
+			<h2>v-show</h2>
+		</template>
+		<template v-if="type === 1">
+			<h2>v-if</h2>
+		</template>
+		
+		<!-- 同一个v-if-else 语句的DOM才会复用 , 并且在DOMtree中相同位置的节点会考虑是否复用-->
+		<template v-if="type === 1">
+		  <label>Username</label>
+		  <input placeholder="Enter your username">
+		</template>
+		<template v-else-if="type !== 1">
+		  <label>Email</label>
+		  <input placeholder="Enter your email address">
+		  <label>Error</label>
+		</template>
+		<!-- <template v-if="type !== 1">
+		  <label>Email</label>
+		  <input placeholder="Enter your email address">
+		</template> -->
+
+		<ul>
+			<!-- v-if v-for优先级低，并且可以访问循环内的变量 -->
+			<li v-for="(item, index, index2) in list" v-if="item%2">
+				{{index}}-{{item}}-{{typeof index2 }}
+			</li>
+			<!-- Object才会有三个参数-->
+			<li v-for="(item, key, index) in person">
+				{{key}}-{{item}}-{{typeof index }}
+			</li>
+			<!-- 造成数组本身发生变化的方法都存在变异方法 -->
+		</ul>
+		<button v-on:click="update">Upate</button>
+	</div>
+</div>
+<script type="text/javascript" src="https://unpkg.com/vue@2.2.4/dist/vue.js"></script>
+<script type="text/javascript">
+	;(function(){
+		
+		window.app = new Vue({
+			el: '#vueDemo',
+			methods: {
+			},
+			data: {
+				msg: 'error',
+				type: 1,
+				error: 'error',
+				waring: 'waring',
+				list: [1,2,3,4,5],
+				person: {
+					name: 'john',
+					age: 22
+				}
+			},
+			methods: {
+				update: function() {
+					this.type = this.type^1;
+				}
+			},
+			computed: {
+				
+			}
+		});
+		
+	})()
+</script>
+</body>
+</html>
+<!-- 
+1. 插值
+2. 属性
+	bool值属性： checked，disabled
+	单值属性
+	多值属性
+3. 指令（指令属性）
+概念：特殊的属性，本质上还是属性（具有属性的特性，属性名称<String>，属性值<String>）
+属性值：单个js表达式
+指令参数
+指令修饰符
+4. 过滤器（简单的文本格式化方式）
+
+-->

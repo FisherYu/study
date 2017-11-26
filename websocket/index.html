@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Socket.IO chat</title>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { font: 13px Helvetica, Arial; }
+      .form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
+      .form input { border: 0; padding: 10px; width: 80%; }
+      .form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+      #messages { list-style-type: none; margin: 0; padding: 0; }
+      #messages li { padding: 5px 10px; }
+      #messages li:nth-child(odd) { background: #eee; }
+    </style>
+  </head>
+  <body>
+    <ul id="messages"></ul>
+    <div class="form">
+      <input id="m" />
+      <button id="send">Send</button>
+      <button id="close">Close</button>
+    </div>
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script> -->
+    
+    <script type="text/javascript">
+      //var socket = io();
+      ;(function(){
+        var ws = new WebSocket("ws://localhost:3030"); 
+        
+        //ws.send('a');
+        console.log('State: ' + ws.readyState)
+        ws.onopen = function(){
+          console.log('onOpen: ' + this.readyState)
+        }; 
+        ws.onmessage = function(evt){
+          console.log('onMessage: ' + this.readyState)
+          console.log(evt.data);
+          //ws.close();
+        }; 
+        ws.onclose = function(evt){
+          console.log('WebSocketClosed: ' + this.readyState);
+        }; 
+        ws.onerror = function(evt){
+          console.log('WebSocketError: ' + this.readyState)
+        };
+
+        var $input = document.getElementById('m');
+        document.getElementById('send').addEventListener('click', function() {
+          if(ws.readyState === 1) {
+            ws.send($input.value);
+          }
+        })
+        document.getElementById('close').addEventListener('click', function() {
+          if(ws.readyState === 1) {
+            ws.close();
+          }
+        })
+      })()
+    </script>
+  </body>
+</html>

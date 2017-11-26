@@ -1,0 +1,82 @@
+<import src="../unicorn/templates/cardTpl.wxml"/>
+<import src="../unicorn/templates/rcon.wxml"/>
+<import src="../unicorn/templates/user.wxml"/>
+
+<block wx:if="{{isNeedLoadingMask}}">
+    <view class="cui-mask">
+    <view class="g-m--c"></view>
+    <view class="g-m--l"></view>
+    </view>
+</block>
+<block wx:else>
+    <view class="cui-mask" style="display: none">
+    <view class="g-m--c"></view>
+    <view class="g-m--l"></view>
+    </view>
+</block>
+
+<block wx:if="{{isNoneOrder}}">
+    <block wx:if="{{userInfo.isUnLogin}}">
+        <template is="unLogin"/>
+    </block>
+
+    <block wx:else>
+        <template is="user" data="{{...userInfo}}"/>
+
+        <view class="failure-page">
+            <icon type="warn" size="93" color="#C9C9C9" class="failure-page_icon" />
+            <view class="failure-page_word">
+                <text class="failure-page_text">暂时没有相关内容</text>
+                <text class="failure-order_text">更多订单请至携程旅行官网或客户端查询</text>
+            </view>
+        </view>
+    </block>    
+</block>
+
+<block wx:elif="{{isFailed}}">
+    <view class="failure-page">
+       <icon type="warn" size="93" color="#C9C9C9" class="failure-page_icon" />
+       <view class="failure-page_word">
+        <text class="failure-page_text">加载失败，请再试试吧。</text>
+        <text class="failure-page_text">你也可以拨打客服电话。</text>
+       </view>
+       <button class="btn-default failure-page_btn" hover-class="btn-default_hover" bindtap="retry">重试</button>
+       <button class="btn-minor failure-page_btn" hover-class="btn-minor_hover" bindtap="makeCall">联系客服</button>
+    </view>
+</block>
+
+<block wx:elif="{{userInfo.isUnLogin}}">
+    <template is="unLogin"/>
+</block>
+
+<block wx:else>
+    <scroll-view style="height:100%; background: #099fde;" scroll-y="true" bindscrolltoupper="onTopPull" bindscrolltolower="onBottomPull">
+        <view class="order-list" style="padding-bottom:{{!orderItems.length && 0}};">
+            <!--未登录情况提示 请点击此登录-->
+            <block wx:if="{{userInfo.isUnLogin}}">
+                <template is="unLogin"/>
+            </block>
+
+            <!-- 用户 -->
+            <block wx:else>
+                <template is="user" data="{{...userInfo}}"/>
+            </block>
+
+            <!-- 卡片 -->
+            <block wx:for="{{orderItems}}" wx:key="for-order-list">
+                <view class="bu-order {{item.baseData.icon}}">
+                    <view class="order-cont" bindtap="cardClick"
+                        data-ubt-key="{{item.baseData.bizType}}_Detail_{{item.baseData.orderId}}"
+                        data-oid="{{item.baseData.orderId}}"
+                        >
+                        <template is="{{item.baseData.templateId}}" data="{{item}}"/>
+                        <template is="rcon" data="{{item}}"/>
+                    </view>
+                </view>
+            </block>
+
+            <!-- 查看更多订单 -->
+            <view hidden="{{!isNoMoreOrder}}"><text class="more-order">更多订单请至携程旅行官网或客户端查询</text></view>
+        </view>
+    </scroll-view>
+</block>

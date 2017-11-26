@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Router</title>
+</head>
+<body>
+<div id="app" >
+	<h1>Hello App!</h1>
+	<p>
+	  <!-- 使用 router-link 组件来导航. -->
+	  <!-- 通过传入 `to` 属性指定链接. -->
+	  <!-- <router-link> 默认会被渲染成一个 `<a>` 标签 -->
+	  <!-- <router-link to="/foo">Go to Foo</router-link>
+	  <router-link to="/bar">Go to Bar</router-link>
+	  <router-link :to="'/user/' + id" @click.native="id++">Go to User</router-link> -->
+	  <button @click="$router.go(-1);">< Go Back</button>
+	  <button @click="$router.push('/foo');">Go to Foo</button>
+	  <button @click="$router.push('/bar');">Go to Bar</button>
+	  <!-- 如果提供了 path，params 会被忽略, 需要手写完整的带有参数的 path -->
+	  <button @click="id++;$router.push({path: '/user/' + id});">Go to User</button>
+	</p>
+	<!-- 路由出口 -->
+	<!-- 路由匹配到的组件将渲染在这里 -->
+	<transition  name="slide">
+		<router-view></router-view>
+	</transition>
+	<router-view class="view two" name="a"></router-view>
+	<router-view class="view three" name="b"></router-view>
+</div>
+
+<script type="text/javascript" src="../vue@2.2.4.js"></script>
+<script type="text/javascript" src="../vue-router@2.7.0.js"></script>
+<script type="text/javascript" src="./src/index.js"></script>
+</body>
+</html>

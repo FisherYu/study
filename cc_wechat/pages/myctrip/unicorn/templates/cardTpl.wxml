@@ -1,0 +1,50 @@
+
+<!-- 门票、酒店 -->
+<template name="Tpl_1t_1d">
+    <text class="order-title {{item.baseData.cancelClass}}">{{item.baseData.orderProductName}}</text>
+    <view class="order-desc {{item.baseData.cancelClass}}">
+       <text>{{item.itemDate.content}}</text>
+    </view>
+    <text class="order-info {{item.baseData.cancelClass}}">{{item.itemDate.subContent}}</text>
+</template>
+
+<!-- 汽车票 -->
+<template name="Tpl_1t_1d_3ds">
+    <view class="order-title {{item.baseData.cancelClass}}">
+        <text>{{item.itemDate.title.depCity}}</text>
+        <view class="icon-go"></view>
+        <text>{{item.itemDate.title.arrCity}}</text>
+    </view>
+    <view class="order-detail">
+        <text class="order-desc {{item.baseData.cancelClass}}">{{item.itemDate.content}}</text>
+        <text wx:if="{{!!item.itemDate.subContent1}}" class="order-desc-s {{item.baseData.cancelClass}}">{{item.itemDate.subContent1}}</text>
+        <text wx:if="{{!!item.itemDate.subContent2}}" class="order-desc-s {{item.baseData.cancelClass}}">{{item.itemDate.subContent2}}</text>
+        <text wx:if="{{!!item.itemDate.subContent3}}" class="order-desc-s {{item.baseData.cancelClass}}">{{item.itemDate.subContent3}}</text>
+    </view>
+</template>
+
+<!-- 机票，火车票 -->
+<template name="Tpl_nt_nd_nds">
+    <!-- 循环多条出发-目的 -->
+    <block wx:for="{{item.itemDate.orderItems}}" wx:for-item="orderItem" wx:key="for-order-items">
+        <view class="order-title {{item.baseData.cancelClass}}">
+            <text>{{orderItem.title.depCity}}</text>
+            <view class="{{orderItem.isTypeReturn && item.baseData.bizType != 'Train' ? 'icon-goback' : 'icon-go'}}"></view>
+            <text>{{orderItem.title.arrCity}}</text>
+        </view>
+        <!-- 循环去程 -->
+        <block wx:for="{{orderItem.forwardItems}}" wx:for-item="forwardItem" wx:key="for-order-items-forwardItem">
+            <view class="order-detail {{orderItem.isTypeReturn && item.baseData.bizType != 'Train' ? 'order-go' : '' }} {{item.baseData.cancelClass}}">
+                <text class="order-desc {{item.baseData.cancelClass}}">{{forwardItem.content}}</text>
+                <text class="order-desc-s {{item.baseData.cancelClass}}">{{forwardItem.subContent}}</text>
+            </view>
+        </block>
+        <!-- 循环返程 -->
+        <block wx:for="{{orderItem.backwardItems}}" wx:for-item="backwardItem" wx:key="for-order-items-backwardItem">
+            <view class="order-detail {{orderItem.isTypeReturn && item.baseData.bizType != 'Train' ? 'order-back' : ''}} {{item.baseData.cancelClass}}">
+                <text class="order-desc {{item.baseData.cancelClass}}">{{backwardItem.content}}</text>
+                <text class="order-desc-s {{item.baseData.cancelClass}}">{{backwardItem.subContent}}</text>
+            </view>
+        </block>
+    </block>
+</template>
