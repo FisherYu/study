@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CSS3 Transfrom</title>
+	<meta charset="utf-8"/>
+	<style type="text/css">
+		.wrap {
+			position: relative;
+		}
+		.element, .element-bg {
+			width: 200px;
+			height: 200px;
+			position: relative;
+			display: inline-block;
+		}
+		.element {
+			background: blue;
+		}
+
+		.element-bg{
+			border: 1px solid #ccc;
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+	</style>
+
+</head>
+<body>
+	<h1>Rotate</h1>
+	<div class="wrap">
+		<!-- 
+		1. rotate(30deg) 等价 rotateZ(30deg)前者是2D旋转，后者是3D旋转引入新方法
+		2. 顺时针为正，逆时针为负
+		-->
+		<div class="element" style="transform: rotate(10deg)"></div>
+		<div class="element-bg"></div>
+	</div>
+	<h1>translate</h1>
+	<div class="wrap">
+		<!-- 
+		1. translate函数第二次参数缺失，则默认为0， 即translate(100px) 等价 translate(100px, 0), translateX(100px)
+		2. 基点[center, center]
+		-->
+		<div class="element" style="transform: translate(100px)"></div>
+		<div class="element-bg"></div>
+	</div>
+	<h1>scale</h1>
+	<div class="wrap">
+		<!--
+			1. 第二个参数缺失，取值第一个参数相同，即scale(1)等价与scale(1, 1)
+			2. 基点[center, center]
+		 -->
+		<div class="element" style="transform: scale(1)"></div>
+		<div class="element-bg"></div>
+	</div>
+	<h1>skew</h1>
+	<div class="wrap">
+		<!--
+			1. 第二个参数缺失，则取值0deg，即skew(10deg)等价与skew(10deg, 0deg)
+			2. 基点[center, center]
+			3. skew有效值范围(-90, 90), 
+				其中90.-90是无效值，
+				大于90deg，则其效果同通过减去n*180(n取值1,2...)转成有效区间内值
+				小于于-90deg，则其效果同通过加上n*180(n取值1,2...)转成有效区间内值
+			4. 取值正负和倾斜方向的关系：
+				skewX 正值表示向左（left）倾斜
+				skewY 正值表示向上（top）倾斜
+		 -->
+		<div class="element" style="transform: skew(10deg)"></div>
+		<div class="element-bg"></div>
+	</div>
+</body>
+</html>
+
+<!-- 
+1. 只影响元素的外观，不影响其合模型属性
+2. 哪元素可以应用stransform属性？
+3. transform-origin 影响rotate, skew函数, 不影响tanslate, scale
+-->
