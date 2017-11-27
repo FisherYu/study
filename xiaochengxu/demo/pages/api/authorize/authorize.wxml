@@ -1,0 +1,5 @@
+<!--pages/api/authrize/authorize.wxml-->
+<view>
+  <button bindtap="openSetting">OpenSetting</button>
+  <button bindtap="authorize">Authorize</button>
+</view>
